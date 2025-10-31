@@ -93,7 +93,7 @@ def train(model, loader, optimizer, loss_fn, epoch, scaler, device):
             loss = loss1 + loss2 + loss3 + loss4
 
         # 防止 NaN 或 Inf
-        if torch.isnan(loss).any() or torch.isinf(loss).any():
+        if not torch.isfinite(loss):
             print(f"Loss is NaN or Inf at batch {i}, skipping...")
             skip_count += 1
             continue  # 跳过该批次

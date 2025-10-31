@@ -187,11 +187,12 @@ class SRMAMamba(nn.Module):
 
         self.out_conv1 = UnetOutBlock(spatial_dims, embed_channels, out_chans)
 
-    def proj_feat(self, x):
-        new_view = [x.size(0)] + self.proj_view_shape
-        x = x.view(new_view)
-        x = x.permute(self.proj_axes).contiguous()
-        return x
+    # Removed unused proj_feat method - it referenced undefined attributes (proj_view_shape, proj_axes)
+    # def proj_feat(self, x):
+    #     new_view = [x.size(0)] + self.proj_view_shape
+    #     x = x.view(new_view)
+    #     x = x.permute(self.proj_axes).contiguous()
+    #     return x
 
     def forward(self, x_in):
         base_size = x_in.shape[-3:]
